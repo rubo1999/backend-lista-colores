@@ -56,6 +56,8 @@ formulario.addEventListener("submit", evento => {
                         "Content-type" : "application/json"
                     }
                 })
+                
+
                 .then(respuesta => respuesta.json())
                 .then(({id,error}) => {
                     if(!error){
@@ -64,6 +66,7 @@ formulario.addEventListener("submit", evento => {
                     }
                     console.log("error al usuario");
                 });
+
                 
             }
         }
