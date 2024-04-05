@@ -8,7 +8,7 @@ function guardarColores(){
     return new Promise((ok,ko) => {
         writeFile("./datos/colores.json", JSON.stringify(colores), error => {
             !error ? ok() : ko();
-        })
+        });
     });
 }
 
@@ -43,7 +43,11 @@ servidor.post("/nuevo", (peticion, respuesta) => {
 });
 
 servidor.delete("/borrar/:id", (peticion, respuesta) => {
-    respuesta.json({error:"bla bla bla"});
+    colores = colores.filter(color => color.id != peticion.params.id);
+
+    guardarColores()
+    .then(() => respuesta.json({resultado:"ok"}))
+    .catch(() => respuesta.json({resultado:"ko"}));
 });
 
 servidor.use((error,peticion,respuesta,siguiente) => {
